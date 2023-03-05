@@ -24,23 +24,18 @@ function App() {
         const [isDeleteAll, setIsDeleteAll] = useState(false)
         
  
-/**************************************** Background Mode toggle **********************************************/
-
 const theme = createTheme({
-
-        palette:{
-          mode: darkTheme? 'dark':'light'
-        }
+        palette:{mode: darkTheme? 'dark':'light'}
 })
 
 
-/****************************************** Handles form submit **************************************************/
-
 const HandleSubmit = (e)=>{
 
+   const taskText= task.trim();
+
           e.preventDefault()
-          if (task){
-                 setTodoArr([...todoArr, {id:uuidv4(), label:task, completed:false}])
+          if (taskText){
+                 setTodoArr([...todoArr, {id:uuidv4(), label:taskText, completed:false}])
 
                  toast.success('Task Added', {
                   position: "top-center",
@@ -68,45 +63,42 @@ const HandleSubmit = (e)=>{
               })}
 
           setTask('')
-
-           
-          
   }
 
-
-/*************************************** Handles checking of completed Todo *************************************/
-
 const ON_COMPLETE = ({id})=>{
-  setTodoArr(todoArr.map(st=>
-      st.id===id?{
-          ...st,
-          completed:!st.completed
-      }:st
-  )
+            setTodoArr(todoArr.map(st=>
+                st.id===id?{
+                    ...st,
+                    completed:!st.completed
+                }:st
+            )
 )}
-
-/******************************************* Handles editing of Todo *******************************************/
 
 const HandleOnEditClick = (todo)=>{
 
-  setEditTodo(todo)
-  setIsDialogOpen(true)
+            setEditTodo(todo)
+            setIsDialogOpen(true)
 }
 
-/****************************************** Updating Edited Todo ************************************************/
 
 const UpdateTodo = ({id, label})=>{
-  
-  setEditTodo(null)
-  setIsDialogOpen(false)
-  setTodoArr(todoArr.map(t=>t.id===id?{
-          ...t, 
-          label:label
-  }: t)
 
-)}
+  const textEdited= label.trim()
 
-/****************************************************** Control MUI Alert dialog state ***********************************************/
+  if(textEdited){
+            setEditTodo(null)
+            setIsDialogOpen(false)
+            setTodoArr(todoArr.map(t=>t.id===id?{
+                            ...t, 
+                            label:textEdited
+                    }: t))
+                }else{
+
+                     setIsDialogOpen(false)
+
+                     }
+}
+
 
 const HandleAlertOpen = (todo)=>{
 
@@ -116,23 +108,21 @@ const HandleAlertOpen = (todo)=>{
 
 const HandleAlertClose = ()=>{
 
-  setIsAlertOpen(false)
+          setIsAlertOpen(false)
   
 }
 
-/****************************************************** Handle Delete All Todo Dialog ***********************************************/
-
 const HandleDelAllDiaOpen = ()=>{
 
-  setIsDeleteAll(true)
+          setIsDeleteAll(true)
+
 }
 
 const HandleDelAllDiaClose = () =>{
 
-  setIsDeleteAll(false)
+          setIsDeleteAll(false)
 }
 
-/****************************************************** Control MUI input dialog state on todo Edit **************************************************/
 
 const HandleClose = () => {
 
@@ -144,8 +134,9 @@ const HandleClose = () => {
   return (
   <ThemeProvider theme={theme}>
     <CssBaseline />
-    <IconButton sx={{display:'flex-end'}} onClick={()=> setDarkTheme(!darkTheme)}> {darkTheme? <Brightness3RoundedIcon/> : <BrightnessHighRoundedIcon/>} </IconButton>
-
+    <Box sx={{display:'flex', justifyContent:'flex-end'}}>
+          <IconButton onClick={()=> setDarkTheme(!darkTheme)}> {darkTheme? <Brightness3RoundedIcon/> : <BrightnessHighRoundedIcon/>} </IconButton>
+    </Box>
     
     <Box sx={{ '& button': { ml:1 }, mx:'auto', maxWidth:600}}>
     <ToastContainer />

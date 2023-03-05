@@ -17,7 +17,6 @@ console.log(editTodo)
         <DialogContent sx={{width:380}}>
           <Box 
               component='form' 
-              noValidate
               autoComplete="off"
               >
           <TextField
