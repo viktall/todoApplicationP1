@@ -27,12 +27,13 @@ console.log(editTodo)
             value={editedText}
             autoFocus
             onChange={(e)=>setEditedText(e.target.value)}
+            onKeyDown={(e) => { e.key === 'Enter' && e.preventDefault() }}
           />
         </Box>
          </DialogContent>
           <DialogActions>
-               <Button onClick={HandleClose}>Cancel</Button>
-               <Button onClick={()=>UpdateTodo({...editTodo, label:editedText})}>Confirm</Button>
+               <Button variant='outlined' onClick={HandleClose}>Cancel</Button>
+               <Button variant='contained' disableElevation onClick={()=>UpdateTodo({...editTodo, label:editedText})}>Confirm</Button>
           </DialogActions>
         
         

@@ -32,10 +32,12 @@ const theme = createTheme({
 const HandleSubmit = (e)=>{
 
    const taskText= task.trim();
-
+   
           e.preventDefault()
           if (taskText){
-                 setTodoArr([...todoArr, {id:uuidv4(), label:taskText, completed:false}])
+
+                 const addedTask=taskText.charAt(0).toUpperCase() + taskText.slice(1)
+                 setTodoArr([...todoArr, {id:uuidv4(), label:addedTask, completed:false}])
 
                  toast.success('Task Added', {
                   position: "top-center",
@@ -84,13 +86,14 @@ const HandleOnEditClick = (todo)=>{
 const UpdateTodo = ({id, label})=>{
 
   const textEdited= label.trim()
-
+  
   if(textEdited){
+      const addedEditedTask=textEdited.charAt(0).toUpperCase() + textEdited.slice(1)
             setEditTodo(null)
             setIsDialogOpen(false)
             setTodoArr(todoArr.map(t=>t.id===id?{
                             ...t, 
-                            label:textEdited
+                            label:addedEditedTask
                     }: t))
                 }else{
 
@@ -145,9 +148,7 @@ const HandleClose = () => {
           <Box 
               component='form' 
               onSubmit={HandleSubmit} 
-              display='flex' 
-              justifyContent='center'
-              sx={{mb:4}}
+              sx={{mb:4, display:'flex', justifyContent:'center'}}
               noValidate
               autoComplete="off"
               >
@@ -176,12 +177,19 @@ const HandleClose = () => {
                     
                     <ListItemButton sx={{color:todo.completed? '#00C5CD':''}} onClick={()=>ON_COMPLETE(todo)} >
                       <Checkbox edge="start" checked={todo.completed}/>
-                      <ListItemText primary={todo.label} />
+                      <ListItemText sx={{bgcolor:'#00f'}} primary={todo.label} />
                     </ListItemButton>
 
-                    <Button onClick={()=>HandleAlertOpen(todo)} variant='outlined'> Delete </Button>
+                    <Button 
+                          onClick={()=>HandleAlertOpen(todo)} 
+                          variant='outlined'> 
+                                              Delete 
+                    </Button>
                     <Button variant='outlined' 
-                            onClick={()=>HandleOnEditClick(todo)} disabled={todo.completed}> {todo.completed? 'Done':'Edit'} </Button>
+                            onClick={()=>HandleOnEditClick(todo)} 
+                            disabled={todo.completed}> 
+                                                      {todo.completed? 'Done':'Edit'} 
+                    </Button>
                   </ListItem>
                   
 
