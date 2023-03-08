@@ -173,7 +173,7 @@ const HandleClose = () => {
                       </Box>
 {todoArr.map((todo)=>(
                 
-                <Container key={todo.id} maxWidth='md'>        
+                <Container key={todo.id}>        
                 <Box sx={{display:'flex', alignItems:'center', p:5}}>
 
                     
