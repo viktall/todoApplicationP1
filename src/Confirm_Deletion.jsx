@@ -5,6 +5,7 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
+import { Container } from '@mui/material';
 
 export default function AlertDialog({children, editTodo, setIsAlertOpen, isAlertOpen, HandleAlertClose, todoArr, setTodoArr, toast}) {
 
@@ -27,7 +28,7 @@ export default function AlertDialog({children, editTodo, setIsAlertOpen, isAlert
   
 
   return (
-    <div>
+    <Container>
       
       <Dialog
         open={isAlertOpen}
@@ -35,8 +36,8 @@ export default function AlertDialog({children, editTodo, setIsAlertOpen, isAlert
         <DialogTitle>
           {"Are you sure you want to delete this task?"}
         </DialogTitle>
-        <DialogContent sx={{width:400}} >
-          <DialogContentText>
+        <DialogContent sx={{width:480}}> 
+          <DialogContentText sx={{ wordBreak: "break-word"}}>
             {children}
           </DialogContentText>
         </DialogContent>
@@ -47,6 +48,6 @@ export default function AlertDialog({children, editTodo, setIsAlertOpen, isAlert
           </Button>
         </DialogActions>
       </Dialog>
-    </div>
+      </Container>
   );
 }

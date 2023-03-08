@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import { Button, Box, TextField, Checkbox, List, ListItem, ListItemText, ListItemButton, IconButton} from '@mui/material';
+import { Button, Box, TextField, Checkbox, IconButton, Divider} from '@mui/material';
 import { v4 as uuidv4 } from 'uuid';
 import { ThemeProvider, createTheme} from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -11,6 +11,7 @@ import FormDialog from './Edit_Dialog';
 import DeleteAllDialog from './DeleteAllDialog';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { Container } from '@mui/system';
 
 
 
@@ -135,104 +136,115 @@ const HandleClose = () => {
 
 
   return (
-  <ThemeProvider theme={theme}>
+  <ThemeProvider theme={theme} >
     <CssBaseline />
-    <Box sx={{display:'flex', justifyContent:'flex-end'}}>
-          <IconButton onClick={()=> setDarkTheme(!darkTheme)}> {darkTheme? <Brightness3RoundedIcon/> : <BrightnessHighRoundedIcon/>} </IconButton>
-    </Box>
-    
-    <Box sx={{ '& button': { ml:1 }, mx:'auto', maxWidth:600}}>
-    <ToastContainer />
-    <Box display='flex' justifyContent='center' sx={{my:6, fontSize:30}}>TODO LIST</Box>
-      
-          <Box 
-              component='form' 
-              onSubmit={HandleSubmit} 
-              sx={{mb:4, display:'flex', justifyContent:'center'}}
-              noValidate
-              autoComplete="off"
-              >
-        
-                <TextField
-                      label="Enter task" 
-                      variant="outlined" 
-                      value={task}
-                      onChange={e=>setTask(e.target.value)}
-                      inputProps={{ maxLength:40}}
-                      sx={{width:355}}
-                      autoFocus
-                  />
-        
-                <Button 
-                      type='submit' 
-                      variant='contained'> Add Task </Button>
+          <Box sx={{display:'flex', justifyContent:'flex-end'}}>
+                <IconButton onClick={()=> setDarkTheme(!darkTheme)}> {darkTheme? <Brightness3RoundedIcon/> : <BrightnessHighRoundedIcon/>} </IconButton>
           </Box>
-
-
-        {todoArr.map((todo)=>(
+    <Container maxWidth='md'>
+    <Box sx={{height: '100%'}}>
           
-                  
-                <List key={todo.id}>
-                  <ListItem divider>
-                    
-                    <ListItemButton sx={{color:todo.completed? '#00C5CD':''}} onClick={()=>ON_COMPLETE(todo)} >
-                      <Checkbox edge="start" checked={todo.completed}/>
-                      <ListItemText sx={{bgcolor:'#00f'}} primary={todo.label} />
-                    </ListItemButton>
+          
+          <Box  sx={{fontSize:30, display:'flex', justifyContent:'center', alignItems:'center', height:120}}>TODO LIST</Box>
+            
+                <Box 
+                    component='form' 
+                    onSubmit={HandleSubmit} 
+                    noValidate
+                    autoComplete="off"
+                    >
+                      <Box sx={{display:'flex', justifyContent:'center', alignItems:'center', my:5}}>
+                      <TextField
+                            label="Enter task" 
+                            variant="outlined" 
+                            value={task}
+                            onChange={e=>setTask(e.target.value)}
+                            inputProps={{ maxLength:80}}
+                            sx={{width:455, mr:1}}
+                            autoFocus
+                        />
+              
+                      <Button 
+                            type='submit'
+                            sx={{height:'3.4375em'}}
+                            size='large' 
+                            variant='contained'> Add </Button>
 
+                      </Box>
+{todoArr.map((todo)=>(
+                
+                <Container key={todo.id} maxWidth='md'>        
+                <Box sx={{display:'flex', alignItems:'center', p:5}}>
+
+                    
+                    <Box sx={{color:todo.completed? '#00C5CD':'', display:'flex', alignItems:'center', flexGrow:1, cursor:'pointer'}} onClick={()=>ON_COMPLETE(todo)} >
+                      <Checkbox checked={todo.completed}/>
+                      <Box sx={{ wordBreak: "break-word"}}>{todo.label}</Box>
+                    </Box>
+                    <Box sx={{ mx: 2 }}>
                     <Button 
                           onClick={()=>HandleAlertOpen(todo)} 
                           variant='outlined'> 
                                               Delete 
                     </Button>
+                    </Box>
+                    <Box>
                     <Button variant='outlined' 
                             onClick={()=>HandleOnEditClick(todo)} 
                             disabled={todo.completed}> 
                                                       {todo.completed? 'Done':'Edit'} 
                     </Button>
-                  </ListItem>
-                  
-
-                </List>    
-
-                 
-      
+                    </Box>
+                    
+                    
+                </Box>  
+                    <Box>
+                        <Divider/>
+                    </Box>  
+                </Container>
       ))}
 
-                {todoArr.length? <Box display='flex' justifyContent='center' sx={{my:5}} >
-                                       <Button variant='contained' onClick={HandleDelAllDiaOpen}> Delete All </Button>
-                                 </Box> : <Box display='flex' justifyContent='center'><BgImg/></Box>
-                
-              
-                }
+                      {todoArr.length? <Box sx={{my:2, display:'flex', justifyContent:'center' }} >
+                                            <Button variant='contained' onClick={HandleDelAllDiaOpen}> Delete All </Button>
+                                      </Box> : <Box display='flex' justifyContent='center'><BgImg/></Box>
+                      
+                    
+                      }
+                </Box>
 
+
+              
+
+                      
+
+                        
+                        {isDialogOpen && <FormDialog 
+                                            UpdateTodo={UpdateTodo} 
+                                            editTodo={editTodo} 
+                                            isDialogOpen={isDialogOpen} 
+                                            HandleClose={HandleClose}/>}
+                                            
+                        {isAlertOpen && <AlertDialog
+                                          editTodo={editTodo}
+                                          isAlertOpen={isAlertOpen}
+                                          setIsAlertOpen={setIsAlertOpen}
+                                          HandleAlertClose={HandleAlertClose}
+                                          todoArr={todoArr}
+                                          setTodoArr = {setTodoArr}
+                                          toast={toast}
+                                          > {editTodo.label} </AlertDialog>}   
+                                          
+                          {isDeleteAll && <DeleteAllDialog
+                                            setTodoArr = {setTodoArr}
+                                            isDeleteAll={isDeleteAll}
+                                            setIsDeleteAll={setIsDeleteAll}
+                                            toast={toast}
+                                            HandleDelAllDiaClose={HandleDelAllDiaClose}>{'Are you sure you want to delete all task?'}</DeleteAllDialog>}
+                            <ToastContainer />
                   
-                  {isDialogOpen && <FormDialog 
-                                      UpdateTodo={UpdateTodo} 
-                                      editTodo={editTodo} 
-                                      isDialogOpen={isDialogOpen} 
-                                      HandleClose={HandleClose}/>}
-                                      
-                   {isAlertOpen && <AlertDialog
-                                    editTodo={editTodo}
-                                    isAlertOpen={isAlertOpen}
-                                    setIsAlertOpen={setIsAlertOpen}
-                                    HandleAlertClose={HandleAlertClose}
-                                    todoArr={todoArr}
-                                    setTodoArr = {setTodoArr}
-                                    toast={toast}
-                                    > {editTodo.label} </AlertDialog>}   
-                                    
-                    {isDeleteAll && <DeleteAllDialog
-                                       setTodoArr = {setTodoArr}
-                                       isDeleteAll={isDeleteAll}
-                                       setIsDeleteAll={setIsDeleteAll}
-                                       toast={toast}
-                                       HandleDelAllDiaClose={HandleDelAllDiaClose}>{'Are you sure you want to delete all task?'}</DeleteAllDialog>}
-                                  
-             
+        
     </Box>
-    
+    </Container>
     </ThemeProvider>
   );
 }

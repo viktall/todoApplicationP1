@@ -20,7 +20,7 @@ console.log(editTodo)
               autoComplete="off"
               >
           <TextField
-            inputProps={{maxLength:40}}
+            inputProps={{maxLength:80}}
             margin="dense"
             fullWidth
             variant="outlined"
