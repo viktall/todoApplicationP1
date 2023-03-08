@@ -141,7 +141,7 @@ const HandleClose = () => {
           <Box sx={{display:'flex', justifyContent:'flex-end'}}>
                 <IconButton onClick={()=> setDarkTheme(!darkTheme)}> {darkTheme? <Brightness3RoundedIcon/> : <BrightnessHighRoundedIcon/>} </IconButton>
           </Box>
-    <Container maxWidth='md'>
+    <Container maxWidth='sm'>
     <Box sx={{height: '100%'}}>
           
           
@@ -173,8 +173,8 @@ const HandleClose = () => {
                       </Box>
 {todoArr.map((todo)=>(
                 
-                <Container key={todo.id}>        
-                <Box sx={{display:'flex', alignItems:'center', p:5}}>
+                <Box key={todo.id}>        
+                <Box sx={{display:'flex', alignItems:'center', py:2}}>
 
                     
                     <Box sx={{color:todo.completed? '#00C5CD':'', display:'flex', alignItems:'center', flexGrow:1, cursor:'pointer'}} onClick={()=>ON_COMPLETE(todo)} >
@@ -201,10 +201,10 @@ const HandleClose = () => {
                     <Box>
                         <Divider/>
                     </Box>  
-                </Container>
+                </Box>
       ))}
 
-                      {todoArr.length? <Box sx={{my:2, display:'flex', justifyContent:'center' }} >
+                      {todoArr.length? <Box sx={{my:4, pb:4, display:'flex', justifyContent:'center' }} >
                                             <Button variant='contained' onClick={HandleDelAllDiaOpen}> Delete All </Button>
                                       </Box> : <Box display='flex' justifyContent='center'><BgImg/></Box>
                       
