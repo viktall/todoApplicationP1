@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import { Button, Box, TextField, Checkbox, IconButton, Divider} from '@mui/material';
+import { Button, Box, TextField, Checkbox, IconButton, Typography, Toolbar, AppBar} from '@mui/material';
 import { v4 as uuidv4 } from 'uuid';
 import { ThemeProvider, createTheme} from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -138,40 +138,56 @@ const HandleClose = () => {
   return (
   <ThemeProvider theme={theme} >
     <CssBaseline />
-          <Box sx={{display:'flex', justifyContent:'flex-end'}}>
-                <IconButton onClick={()=> setDarkTheme(!darkTheme)}> {darkTheme? <Brightness3RoundedIcon/> : <BrightnessHighRoundedIcon/>} </IconButton>
-          </Box>
+          
+          
+      <AppBar position="fixed">
+        <Toolbar variant="dense">
+        <Typography variant="h6" color="inherit" component="div">
+                TODO LIST
+          </Typography>
+          <Box sx={{ flexGrow: 1 }} />
+
+          <IconButton 
+                edge="end" 
+                color="inherit" 
+                onClick={()=> setDarkTheme(!darkTheme)}> {darkTheme? <Brightness3RoundedIcon/> : <BrightnessHighRoundedIcon/>} 
+          
+          </IconButton>
+          
+        </Toolbar>
+      </AppBar>
+      <Toolbar />
+    
+            
+    
     <Container maxWidth='sm'>
     <Box sx={{height: '100vh'}}>
           
-          
-          <Box  sx={{fontSize:30, fontWeight:'bold', display:'flex', justifyContent:'center', alignItems:'center', height:120}}>TODO LIST</Box>
             
                 <Box 
                     component='form' 
                     onSubmit={HandleSubmit} 
                     noValidate
                     autoComplete="off">
-                      <Box sx={{display:'flex', justifyContent:'center', height:100}}>
-                      <TextField
-                            label="Enter task" 
-                            variant="outlined" 
-                            value={task}
-                            onChange={e=>setTask(e.target.value)}
-                            sx={{width:455, mr:1}}
-                            autoFocus
-                        />
-              
-                      <Button 
-                            type='submit'
-                            sx={{height:'3.700em'}}
-                            size='large' 
-                            variant='contained'> Add </Button>
+                      <Box sx={{display:'flex', justifyContent:'center', alignItems:'center', height:175}}>
+                              <TextField
+                                    label="Enter task" 
+                                    variant="outlined" 
+                                    value={task}
+                                    onChange={e=>setTask(e.target.value)}
+                                    sx={{width:455, mr:1}}
+                                    autoFocus
+                                />
+                      
+                              <Button 
+                                    type='submit'
+                                    sx={{height:'3.700em'}}
+                                    size='large' 
+                                    variant='contained'> Add </Button>
                       </Box>
 {todoArr.map((todo)=>(
-                
-                <Box key={todo.id}>        
-                <Box sx={{display:'flex', alignItems:'center', py:2}}>
+                      
+                <Box key={todo.id} sx={{display:'flex', alignItems:'center', py:2, borderBottom:1, borderColor:'divider'}}>
 
                     
                     <Box sx={{color:todo.completed? '#00C5CD':'', display:'flex', alignItems:'center', flexGrow:1, cursor:'pointer'}} onClick={()=>ON_COMPLETE(todo)} >
@@ -195,14 +211,11 @@ const HandleClose = () => {
                     
                     
                 </Box>  
-                    <Box>
-                        <Divider/>
-                    </Box>  
-                </Box>
+                     
       ))}
 
                       {todoArr.length? <Box sx={{mt:4, pb:4, display:'flex', justifyContent:'center' }} >
-                                            <Button variant='contained' onClick={HandleDelAllDiaOpen}> Delete All </Button>
+                                            <Button variant='contained' size='large' onClick={HandleDelAllDiaOpen}> Delete All </Button>
                                       </Box> : <Box display='flex' justifyContent='center'><BgImg/></Box>
                       
                     
