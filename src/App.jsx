@@ -142,34 +142,31 @@ const HandleClose = () => {
                 <IconButton onClick={()=> setDarkTheme(!darkTheme)}> {darkTheme? <Brightness3RoundedIcon/> : <BrightnessHighRoundedIcon/>} </IconButton>
           </Box>
     <Container maxWidth='sm'>
-    <Box sx={{height: '100%'}}>
+    <Box sx={{height: '100vh'}}>
           
           
-          <Box  sx={{fontSize:30, display:'flex', justifyContent:'center', alignItems:'center', height:120}}>TODO LIST</Box>
+          <Box  sx={{fontSize:30, fontWeight:'bold', display:'flex', justifyContent:'center', alignItems:'center', height:120}}>TODO LIST</Box>
             
                 <Box 
                     component='form' 
                     onSubmit={HandleSubmit} 
                     noValidate
-                    autoComplete="off"
-                    >
-                      <Box sx={{display:'flex', justifyContent:'center', alignItems:'center', my:5}}>
+                    autoComplete="off">
+                      <Box sx={{display:'flex', justifyContent:'center', height:100}}>
                       <TextField
                             label="Enter task" 
                             variant="outlined" 
                             value={task}
                             onChange={e=>setTask(e.target.value)}
-                            inputProps={{ maxLength:80}}
                             sx={{width:455, mr:1}}
                             autoFocus
                         />
               
                       <Button 
                             type='submit'
-                            sx={{height:'3.4375em'}}
+                            sx={{height:'3.700em'}}
                             size='large' 
                             variant='contained'> Add </Button>
-
                       </Box>
 {todoArr.map((todo)=>(
                 
@@ -181,7 +178,7 @@ const HandleClose = () => {
                       <Checkbox checked={todo.completed}/>
                       <Box sx={{ wordBreak: "break-word"}}>{todo.label}</Box>
                     </Box>
-                    <Box sx={{ mx: 2 }}>
+                    <Box sx={{ mx:1}}>
                     <Button 
                           onClick={()=>HandleAlertOpen(todo)} 
                           variant='outlined'> 
@@ -204,7 +201,7 @@ const HandleClose = () => {
                 </Box>
       ))}
 
-                      {todoArr.length? <Box sx={{my:4, pb:4, display:'flex', justifyContent:'center' }} >
+                      {todoArr.length? <Box sx={{mt:4, pb:4, display:'flex', justifyContent:'center' }} >
                                             <Button variant='contained' onClick={HandleDelAllDiaOpen}> Delete All </Button>
                                       </Box> : <Box display='flex' justifyContent='center'><BgImg/></Box>
                       
@@ -212,12 +209,7 @@ const HandleClose = () => {
                       }
                 </Box>
 
-
-              
-
-                      
-
-                        
+                    
                         {isDialogOpen && <FormDialog 
                                             UpdateTodo={UpdateTodo} 
                                             editTodo={editTodo} 
