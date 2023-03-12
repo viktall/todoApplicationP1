@@ -160,7 +160,7 @@ const HandleClose = () => {
             
     
     <Container maxWidth='sm'>
-    <Box sx={{height: '100vh'}}>
+    <Box sx={{height:'100%'}}>
           
             
                 <Box 

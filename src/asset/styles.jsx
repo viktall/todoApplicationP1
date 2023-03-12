@@ -3,7 +3,7 @@
 const Styles={
 
                 FormBox:{
-                            display:'flex', justifyContent:'center', alignItems:'center', mb:3
+                            display:'flex', justifyContent:'center', alignItems:'center', mb:4
                         },
 
                 TaskBox:{
