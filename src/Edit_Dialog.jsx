@@ -1,14 +1,10 @@
 import React, {useState} from 'react';
-import Button from '@mui/material/Button';
-import TextField from '@mui/material/TextField';
-import Dialog from '@mui/material/Dialog';
-import { DialogActions, DialogContent, DialogTitle, Box } from '@mui/material';
+import { DialogActions, DialogContent, DialogTitle, Dialog, TextField, Button, Box } from '@mui/material';
 
 
 const FormDialog=({editTodo, UpdateTodo, isDialogOpen, HandleClose})=> {
 
-const[editedText, setEditedText] = useState(editTodo.label)
-console.log(editTodo)
+        const[editedText, setEditedText] = useState(editTodo.label)
   
   return (
     

@@ -3,7 +3,7 @@ import { DialogContent, DialogTitle, DialogActions, Dialog, Button } from '@mui/
 
 
 
-export default function DeleteAllDialog({children, setTodoArr, setIsDeleteAll, isDeleteAll, HandleDelAllDiaClose, toast}) {
+ const DeleteAllDialog=({children, setTodoArr, setIsDeleteAll, isDeleteAll, HandleDelAllDiaClose, toast})=> {
 
     const OnDeleteAll =()=>{
 
@@ -43,3 +43,5 @@ export default function DeleteAllDialog({children, setTodoArr, setIsDeleteAll, i
     </div>
   );
 }
+
+export default DeleteAllDialog

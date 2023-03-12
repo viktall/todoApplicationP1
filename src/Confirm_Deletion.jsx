@@ -1,13 +1,7 @@
-import * as React from 'react';
-import Button from '@mui/material/Button';
-import Dialog from '@mui/material/Dialog';
-import DialogActions from '@mui/material/DialogActions';
-import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
-import DialogTitle from '@mui/material/DialogTitle';
-import { Container } from '@mui/material';
+import React from 'react';
+import { Container, DialogTitle, DialogContentText, DialogContent, DialogActions, Dialog, Button } from '@mui/material';
 
-export default function AlertDialog({children, editTodo, setIsAlertOpen, isAlertOpen, HandleAlertClose, todoArr, setTodoArr, toast}) {
+const AlertDialog=({children, editTodo, setIsAlertOpen, isAlertOpen, HandleAlertClose, todoArr, setTodoArr, toast}) =>{
 
     const ON_DELETE =()=>{
 
@@ -51,3 +45,6 @@ export default function AlertDialog({children, editTodo, setIsAlertOpen, isAlert
       </Container>
   );
 }
+
+
+export default AlertDialog

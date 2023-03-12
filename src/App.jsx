@@ -1,8 +1,7 @@
 import React, {useState} from 'react'
-import { Button, Box, TextField, Checkbox, IconButton, Typography, Toolbar, AppBar} from '@mui/material';
+import { Button, Box, TextField, Checkbox, IconButton, Typography, Toolbar, AppBar, CssBaseline} from '@mui/material';
 import { v4 as uuidv4 } from 'uuid';
 import { ThemeProvider, createTheme} from '@mui/material/styles';
-import CssBaseline from '@mui/material/CssBaseline';
 import BrightnessHighRoundedIcon from '@mui/icons-material/BrightnessHighRounded';
 import Brightness3RoundedIcon from '@mui/icons-material/Brightness3Rounded';
 import AlertDialog from './Confirm_Deletion';
@@ -12,61 +11,61 @@ import DeleteAllDialog from './DeleteAllDialog';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { Container } from '@mui/system';
+import Styles from './asset/styles'
 
 
 
-function App() {
-        const [darkTheme, setDarkTheme] = useState(false)
-        const [task, setTask] = useState('')
-        const [todoArr, setTodoArr] = useState([])
-        const [editTodo, setEditTodo] = useState(null)
-        const [isDialogOpen, setIsDialogOpen] = useState(false)
-        const [isAlertOpen, setIsAlertOpen] = useState(false)
-        const [isDeleteAll, setIsDeleteAll] = useState(false)
+const App=()=>{
+                  const [darkTheme, setDarkTheme] = useState(false)
+                  const [task, setTask] = useState('')
+                  const [todoArr, setTodoArr] = useState([])
+                  const [editTodo, setEditTodo] = useState(null)
+                  const [isDialogOpen, setIsDialogOpen] = useState(false)
+                  const [isAlertOpen, setIsAlertOpen] = useState(false)
+                  const [isDeleteAll, setIsDeleteAll] = useState(false)
         
  
-const theme = createTheme({
-        palette:{mode: darkTheme? 'dark':'light'}
-})
-
-
-const HandleSubmit = (e)=>{
-
-   const taskText= task.trim();
-   
-          e.preventDefault()
-          if (taskText){
-
-                 const addedTask=taskText.charAt(0).toUpperCase() + taskText.slice(1)
-                 setTodoArr([...todoArr, {id:uuidv4(), label:addedTask, completed:false}])
-
-                 toast.success('Task Added', {
-                  position: "top-center",
-                  autoClose: 1000,
-                  hideProgressBar: false,
-                  closeOnClick: true,
-                  pauseOnHover: false,
-                  draggable: false,
-                  progress: undefined,
-                  theme: "light"
-
+                  const theme = createTheme({
+                          palette:{mode: darkTheme? 'dark':'light'}
                   })
 
-              }else{
 
-                toast.warn('Enter task !', {
-                  position: "top-center",
-                  autoClose: 1000,
-                  hideProgressBar: false,
-                  closeOnClick: true,
-                  pauseOnHover: false,
-                  draggable: false,
-                  progress: undefined,
-                  theme: "light",
-              })}
+                  const HandleSubmit = (e)=>{
+                                  e.preventDefault()
+                                  setTask('')
+                                  const taskText= task.trim();
+                    
+                            
+                            if (taskText){
 
-          setTask('')
-  }
+                                  const addedTask=taskText.charAt(0).toUpperCase() + taskText.slice(1)
+                                  setTodoArr([...todoArr, {id:uuidv4(), label:addedTask, completed:false}])
+
+                                  toast.success('Task Added', {
+                                    position: "top-center",
+                                    autoClose: 1000,
+                                    hideProgressBar: false,
+                                    closeOnClick: true,
+                                    pauseOnHover: false,
+                                    draggable: false,
+                                    progress: undefined,
+                                    theme: "light"
+
+                                    })
+
+                                }else{
+
+                                  toast.warn('Enter task !', {
+                                    position: "top-center",
+                                    autoClose: 1000,
+                                    hideProgressBar: false,
+                                    closeOnClick: true,
+                                    pauseOnHover: false,
+                                    draggable: false,
+                                    progress: undefined,
+                                    theme: "light",
+                                })}
+                    }
 
 const ON_COMPLETE = ({id})=>{
             setTodoArr(todoArr.map(st=>
@@ -156,7 +155,7 @@ const HandleClose = () => {
           
         </Toolbar>
       </AppBar>
-      <Toolbar />
+      <Toolbar sx={{mb:5}}/>
     
             
     
@@ -169,7 +168,7 @@ const HandleClose = () => {
                     onSubmit={HandleSubmit} 
                     noValidate
                     autoComplete="off">
-                      <Box sx={{display:'flex', justifyContent:'center', alignItems:'center', height:175}}>
+                      <Box sx={Styles.FormBox}>
                               <TextField
                                     label="Enter task" 
                                     variant="outlined" 
@@ -181,16 +180,16 @@ const HandleClose = () => {
                       
                               <Button 
                                     type='submit'
-                                    sx={{height:'3.700em'}}
+                                    sx={{height:'3.7em'}}
                                     size='large' 
                                     variant='contained'> Add </Button>
                       </Box>
 {todoArr.map((todo)=>(
                       
-                <Box key={todo.id} sx={{display:'flex', alignItems:'center', py:2, borderBottom:1, borderColor:'divider'}}>
+                <Box key={todo.id} sx={Styles.TaskBox}>
 
                     
-                    <Box sx={{color:todo.completed? '#00C5CD':'', display:'flex', alignItems:'center', flexGrow:1, cursor:'pointer'}} onClick={()=>ON_COMPLETE(todo)} >
+                    <Box sx={{color:todo.completed? '#00C5CD':'', ...Styles.TaskInnerBox}} onClick={()=>ON_COMPLETE(todo)} >
                       <Checkbox checked={todo.completed}/>
                       <Box sx={{ wordBreak: "break-word"}}>{todo.label}</Box>
                     </Box>
@@ -214,9 +213,9 @@ const HandleClose = () => {
                      
       ))}
 
-                      {todoArr.length? <Box sx={{mt:4, pb:4, display:'flex', justifyContent:'center' }} >
+                      {todoArr.length? <Box sx={Styles.DelBox} >
                                             <Button variant='contained' size='large' onClick={HandleDelAllDiaOpen}> Delete All </Button>
-                                      </Box> : <Box display='flex' justifyContent='center'><BgImg/></Box>
+                                      </Box> : <Box sx={Styles.SvgBox}><BgImg/></Box>
                       
                     
                       }
