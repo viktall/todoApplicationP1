@@ -1,47 +1,35 @@
 import * as React from 'react';
-import { DialogContent, DialogTitle, DialogActions, Dialog, Button } from '@mui/material';
+import { Container, DialogContent, DialogTitle, DialogActions, Dialog, Button } from '@mui/material';
 
+const DeleteAllDialog=({children, setTodoArr, setIsDeleteAll, isDeleteAll, HandleDelAllDiaClose, toast})=>{
 
-
- const DeleteAllDialog=({children, setTodoArr, setIsDeleteAll, isDeleteAll, HandleDelAllDiaClose, toast})=> {
-
-    const OnDeleteAll =()=>{
-
-        setIsDeleteAll(false)
-        setTodoArr([])
-        toast.success('Deleted successfully', {
-          position: "top-center",
-          autoClose: 1000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: false,
-          draggable: false,
-          progress: undefined,
-          theme: "light"
-
-          })
-        
-      }
+                        const OnDeleteAll=()=>{
+                                                setIsDeleteAll(false)
+                                                setTodoArr([])
+                                                toast.success('Deleted successfully', {
+                                                  position: "top-center",
+                                                  autoClose: 1000,
+                                                  hideProgressBar: false,
+                                                  closeOnClick: true,
+                                                  pauseOnHover: false,
+                                                  draggable: false,
+                                                  progress: undefined,
+                                                  theme: "light"
+                                              })}
   
-
   return (
-    <div>
-      
-      <Dialog
-        open={isDeleteAll}
-        onClose={HandleDelAllDiaClose}>
-        <DialogTitle>
-          {children}
-        </DialogTitle>
-        <DialogContent sx={{width:400}} >
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={HandleDelAllDiaClose}>No</Button>
-          <Button onClick={OnDeleteAll}> Yes </Button>
-        </DialogActions>
-      </Dialog>
-    </div>
-  );
-}
+            <Container>
+                    <Dialog open={isDeleteAll} onClose={HandleDelAllDiaClose}>
+                            <DialogTitle>
+                                        {children}
+                            </DialogTitle>
+                            <DialogContent/>
+                            <DialogActions>
+                                    <Button variant='contained' disableElevation size='small' onClick={HandleDelAllDiaClose}>Cancel</Button>
+                                    <Button variant='contained' disableElevation size='small' onClick={OnDeleteAll}>Confirm</Button>
+                            </DialogActions>
+                    </Dialog>
+            </Container>
+  )}
 
 export default DeleteAllDialog

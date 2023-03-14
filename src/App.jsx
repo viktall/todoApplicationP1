@@ -1,7 +1,6 @@
 import React, {useState} from 'react'
-import { Button, Box, TextField, Checkbox, IconButton, Typography, Toolbar, AppBar, CssBaseline} from '@mui/material';
+import { Button, Box, TextField, Checkbox, Container, IconButton, Typography, Toolbar, AppBar, CssBaseline} from '@mui/material';
 import { v4 as uuidv4 } from 'uuid';
-import { Container } from '@mui/system';
 import { ToastContainer, toast } from 'react-toastify';
 import { ThemeProvider, createTheme} from '@mui/material/styles';
 import BrightnessHighRoundedIcon from '@mui/icons-material/BrightnessHighRounded';
@@ -140,7 +139,7 @@ return (
                                           variant="outlined" 
                                           value={task}
                                           onChange={e=>setTask(e.target.value)}
-                                          sx={{width:455, mr:1}}
+                                          sx={{width:'100%', mr:1}}
                                           autoFocus/>
 
                                     <Button 
@@ -157,7 +156,7 @@ return (
                                           <Checkbox checked={todo.completed}/>
                                           <Box sx={{ wordBreak: "break-word"}}>{todo.label}</Box>
                                 </Box>
-                                <Box sx={{ mx:1}}>
+                                <Box sx={{ ml:2, mr:1}}>
                                           <Button 
                                                 onClick={()=>HandleAlertOpen(todo)} 
                                                 variant='outlined'> 
