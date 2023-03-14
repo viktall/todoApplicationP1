@@ -1,11 +1,12 @@
 import React from 'react';
 import { Container, DialogTitle, DialogContentText, DialogContent, DialogActions, Dialog, Button } from '@mui/material';
 
-const AlertDialog=({children, editTodo, setIsAlertOpen, isAlertOpen, HandleAlertClose, todoArr, setTodoArr, toast}) =>{
+const AlertDialog=({children, editTodo, setIsAlertOpen, isAlertOpen, HandleAlertClose, todoArr, setTodoArr, toast, setEditTodo}) =>{
 
     const ON_DELETE =()=>{
 
         setIsAlertOpen(false)
+        setEditTodo(null)
         setTodoArr(todoArr.filter(todo=>todo.id!==editTodo.id))
         toast.success('Deleted successfully', {
           position: "top-center",
