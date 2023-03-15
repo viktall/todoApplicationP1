@@ -8,7 +8,7 @@ const FormDialog=({editTodo, UpdateTodo, isDialogOpen, HandleClose})=> {
 return (
           <Container>
               <Dialog open={isDialogOpen} onClose={HandleClose}>
-                        <DialogTitle sx={{width:400}}>Edit Todo</DialogTitle>
+                        <DialogTitle sx={{width:430}}>Edit task</DialogTitle>
                         <DialogContent>
                                       <TextField
                                         fullWidth
