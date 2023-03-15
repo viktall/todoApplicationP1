@@ -25,8 +25,15 @@ const DeleteAllDialog=({children, setTodoArr, setIsDeleteAll, isDeleteAll, Handl
                             </DialogTitle>
                             <DialogContent/>
                             <DialogActions>
-                                    <Button variant='contained' disableElevation size='small' onClick={HandleDelAllDiaClose}>Cancel</Button>
-                                    <Button variant='contained' disableElevation size='small' onClick={OnDeleteAll}>Confirm</Button>
+                                    <Button 
+                                           disableElevation
+                                           variant='contained'  
+                                           sx={{ bgcolor:'#b3b3b3', color:'#000','&:hover':{bgcolor:'#999999'}}}
+                                           onClick={HandleDelAllDiaClose}>No</Button>
+                                    <Button 
+                                           disableElevation
+                                           variant='contained' 
+                                           onClick={OnDeleteAll}>Yes</Button>
                             </DialogActions>
                     </Dialog>
             </Container>

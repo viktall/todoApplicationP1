@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import { Container, DialogActions, DialogContent, DialogTitle, Dialog, TextField, Button} from '@mui/material';
+import {Container, DialogActions, DialogContent, DialogTitle, Dialog, TextField, Button} from '@mui/material';
 
 
 const FormDialog=({editTodo, UpdateTodo, isDialogOpen, HandleClose})=> {
@@ -8,9 +8,10 @@ const FormDialog=({editTodo, UpdateTodo, isDialogOpen, HandleClose})=> {
 return (
           <Container>
               <Dialog open={isDialogOpen} onClose={HandleClose}>
-                        <DialogTitle>Edit Todo</DialogTitle>
+                        <DialogTitle sx={{width:400}}>Edit Todo</DialogTitle>
                         <DialogContent>
                                       <TextField
+                                        fullWidth
                                         margin="dense"
                                         variant="outlined"
                                         value={editedText}
@@ -20,8 +21,15 @@ return (
                                       />
                         </DialogContent>
                         <DialogActions>
-                            <Button variant='outlined' disableElevation size='small' onClick={HandleClose}>Cancel</Button>
-                            <Button variant='contained' disableElevation size='small' onClick={()=>UpdateTodo({...editTodo, label:editedText})}>Confirm</Button>
+                            <Button 
+                                    disableElevation
+                                    variant='contained' 
+                                    sx={{ bgcolor:'#b3b3b3', color:'#000','&:hover':{bgcolor:'#999999'}}} 
+                                    onClick={HandleClose}>No</Button>
+                            <Button 
+                                    disableElevation
+                                    variant='contained' 
+                                    onClick={()=>UpdateTodo({...editTodo, label:editedText})}>Yes</Button>
                         </DialogActions>
               </Dialog>
           </Container>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, DialogTitle, DialogContentText, DialogContent, DialogActions, Dialog, Button } from '@mui/material';
+import { Box, Container, DialogTitle, DialogContentText, DialogContent, DialogActions, Dialog, Button } from '@mui/material';
 
 const AlertDialog=({children, editTodo, setIsAlertOpen, isAlertOpen, HandleAlertClose, todoArr, setTodoArr, toast, setEditTodo})=>{
 
@@ -23,18 +23,27 @@ const AlertDialog=({children, editTodo, setIsAlertOpen, isAlertOpen, HandleAlert
   return (
               <Container>
                       <Dialog open={isAlertOpen} onClose={HandleAlertClose}>
+                        <Box sx={{maxWidth:430}}>
                             <DialogTitle>
                                         {"Are you sure you want to delete this task?"}
                             </DialogTitle>
-                            <DialogContent sx={{maxWidth:455}}> 
+                            <DialogContent> 
                                         <DialogContentText sx={{ wordBreak: "break-word"}}>
                                                               {children}
                                         </DialogContentText>
                             </DialogContent>
                             <DialogActions>
-                                        <Button variant='contained' disableElevation size='small' onClick={HandleAlertClose}>Cancel</Button>
-                                        <Button variant='contained' disableElevation size='small' onClick={ON_DELETE}>Confirm</Button>
+                                        <Button 
+                                                disableElevation
+                                                variant='contained' 
+                                                sx={{ bgcolor:'#b3b3b3', color:'#000','&:hover':{bgcolor:'#999999'}}}
+                                                onClick={HandleAlertClose}>No</Button>
+                                        <Button 
+                                                disableElevation
+                                                variant='contained' 
+                                                onClick={ON_DELETE}>Yes</Button>
                             </DialogActions>
+                            </Box>
                         </Dialog>
               </Container>
   )}

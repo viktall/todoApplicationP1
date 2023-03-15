@@ -152,7 +152,7 @@ return (
 {todoArr.map((todo)=>(     
                       <Box key={todo.id} sx={Styles.TaskBox}>
 
-                                <Box sx={{color:todo.completed? '#00C5CD':'', ...Styles.TaskInnerBox}} onClick={()=>ON_COMPLETE(todo)}>
+                                <Box sx={{color:todo.completed? 'success.main':null, ...Styles.TaskInnerBox}} onClick={()=>ON_COMPLETE(todo)}>
                                           <Checkbox checked={todo.completed}/>
                                           <Box sx={{ wordBreak: "break-word"}}>{todo.label}</Box>
                                 </Box>
