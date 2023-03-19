@@ -1,10 +1,10 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import { Button, Box, TextField, Checkbox, Container, IconButton, Typography, Toolbar, AppBar, CssBaseline} from '@mui/material';
 import { v4 as uuidv4 } from 'uuid';
 import { ToastContainer, toast } from 'react-toastify';
 import { ThemeProvider, createTheme} from '@mui/material/styles';
-import BrightnessHighRoundedIcon from '@mui/icons-material/BrightnessHighRounded';
-import Brightness3RoundedIcon from '@mui/icons-material/Brightness3Rounded';
+import LightModeIcon from '@mui/icons-material/LightMode';
+import DarkModeIcon from '@mui/icons-material/DarkMode';
 import AlertDialog from './Confirm_Deletion';
 import BgImg from './bgimg'
 import FormDialog from './Edit_Dialog';
@@ -15,7 +15,7 @@ import Styles from './asset/styles'
 const App=()=>{
                   const [darkTheme, setDarkTheme] = useState(false)
                   const [task, setTask] = useState('')
-                  const [todoArr, setTodoArr] = useState([])
+                  const [todoArr, setTodoArr] = useState(() => JSON.parse(localStorage.getItem("tasks"))||[])
                   const [editTodo, setEditTodo] = useState(null)
                   const [isAlertOpen, setIsAlertOpen] = useState(false)
                   const [isDialogOpen, setIsDialogOpen] = useState(false)
@@ -24,6 +24,10 @@ const App=()=>{
                   const theme = createTheme({
                                               palette:{mode: darkTheme? 'dark':'light'}
                                             })
+
+                                useEffect(() => {
+                                                   localStorage.setItem("tasks", JSON.stringify(todoArr));
+                                                }, [todoArr]);
 
                   const HandleSubmit = (e)=>{
                                               e.preventDefault()
@@ -120,7 +124,8 @@ return (
                                   <IconButton 
                                         edge="end" 
                                         color="inherit" 
-                                        onClick={()=> setDarkTheme(!darkTheme)}> {darkTheme? <Brightness3RoundedIcon/> : <BrightnessHighRoundedIcon/>} 
+                                        size="small"
+                                        onClick={()=> setDarkTheme(!darkTheme)}> {darkTheme? <DarkModeIcon/> : <LightModeIcon/>} 
                                   </IconButton> 
                           </Toolbar>
                   </AppBar>
@@ -184,11 +189,21 @@ return (
                                                   </Button>
                                             </Box>) 
                                                     : 
-                                            (<Box sx={Styles.SvgBox}>
+                                            (
+                                                <Box>
+                                            <Box sx={Styles.SvgBox}>
                                                       <BgImg/>
-                                            </Box>)
+                                            </Box>
+                                            <Toolbar/>
+                                            <AppBar position="fixed" color="inherit" sx={{ top: 'auto', bottom: 0 }}>
+                                            <Toolbar> copy right </Toolbar>
+                                           </AppBar>
+
+                                           </Box>
+                                      )
                             }
                       </Box>
+                      
 
                               {isDialogOpen && <FormDialog 
                                                   UpdateTodo={UpdateTodo} 
@@ -220,6 +235,8 @@ return (
                       <ToastContainer/>           
                   </Box>
           </Container>
+          
+          
           </ThemeProvider>
   )}
 export default App;
