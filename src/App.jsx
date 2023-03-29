@@ -159,7 +159,7 @@ return (
 
                                 <Box sx={{color:todo.completed? 'success.main':null, ...Styles.TaskInnerBox}} onClick={()=>ON_COMPLETE(todo)}>
                                           <Checkbox checked={todo.completed}/>
-                                          <Box sx={{ wordBreak: "break-word"}}>{todo.label}</Box>
+                                          <Box sx={{wordBreak: "break-all"}}>{todo.label}</Box>
                                 </Box>
                                 <Box sx={{ ml:2, mr:1}}>
                                           <Button 
@@ -190,13 +190,13 @@ return (
                                             </Box>) 
                                                     : 
                                             (
-                                                <Box>
-                                            <Box sx={Styles.SvgBox}>
-                                                      <BgImg/>
-                                            </Box>
-                                            <Toolbar/>
-                                            <AppBar position="fixed" color="inherit" sx={{ top: 'auto', bottom: 0 }}>
-                                            <Toolbar> copy right </Toolbar>
+                                            <Box>
+                                                        <Box sx={Styles.SvgBox}>
+                                                                <BgImg/>
+                                                        </Box>
+                                            
+                                            <AppBar position="fixed" color="inherit" sx={{ top: 'auto', bottom: 0, bgcolor:'0e0e0e'}}>
+                                            <Toolbar sx={{mx:'auto'}}> created by Ugwu </Toolbar>
                                            </AppBar>
 
                                            </Box>

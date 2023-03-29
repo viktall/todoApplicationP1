@@ -28,7 +28,7 @@ const AlertDialog=({children, editTodo, setIsAlertOpen, isAlertOpen, HandleAlert
                                         {"Are you sure you want to delete this task?"}
                             </DialogTitle>
                             <DialogContent> 
-                                        <DialogContentText sx={{ wordBreak: "break-word"}}>
+                                        <DialogContentText sx={{wordBreak: "break-all"}}>
                                                               {children}
                                         </DialogContentText>
                             </DialogContent>
