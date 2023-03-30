@@ -33,6 +33,7 @@ const Styles={
                 SvgBox:{
                             display:'flex', 
                             justifyContent:'center'
+                            
                         }
 
 

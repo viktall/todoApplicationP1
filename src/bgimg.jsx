@@ -4,7 +4,7 @@ const Bgimg = ()=>{
 
 return(
     
-<svg xmlns="http://www.w3.org/2000/svg" data-name="Layer 1" width="300" height="300" viewBox="0 0 704.36225 635">
+<svg xmlns="http://www.w3.org/2000/svg" data-name="Layer 1" width="260" height="300" viewBox="0 0 704.36225 635">
 
     <path d="M685.45128,501.5h-258a33.03734,33.03734,0,0,1-33-33v-303a33.03734,33.03734,0,0,1,33-33H667.47813l50.97315,40.62891V468.5A33.03734,33.03734,0,0,1,685.45128,501.5Z" transform="translate(-247.81887 -132.5)" fill="#e6e6e6"/>
     
