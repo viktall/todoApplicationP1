@@ -11,6 +11,7 @@ import FormDialog from './Edit_Dialog';
 import DeleteAllDialog from './DeleteAllDialog';
 import 'react-toastify/dist/ReactToastify.css';
 import Styles from './asset/styles'
+import { light } from '@mui/material/styles/createPalette';
 
 const App=()=>{
 
@@ -40,7 +41,7 @@ const App=()=>{
                                 pauseOnHover: false,
                                 draggable: false,
                                 progress: undefined,
-                                theme: "light"
+                                theme: darkTheme ? 'dark':'light'
                                })}else{
                         toast.warn('Enter task !',{
                                 position: "top-center",
@@ -50,7 +51,7 @@ const App=()=>{
                                 pauseOnHover: false,
                                 draggable: false,
                                 progress: undefined,
-                                theme: "light",
+                                theme: darkTheme ? 'dark':'light'
                                 })}
                         setTask('')}
 
@@ -93,7 +94,7 @@ const App=()=>{
             <CssBaseline />
                 <AppBar position="fixed">
                 <Toolbar variant="dense">
-                        <Typography variant="h6" color="inherit" component="div">
+                        <Typography variant="h6" component="div">
                             TODOLIST
                         </Typography>
                         <Box sx={{ flexGrow: 1}}/>
@@ -102,7 +103,6 @@ const App=()=>{
                                 color="inherit" 
                                 size="small"
                                 aria-label="mode switch"
-                                sx={{'& .MuiTouchRipple-root':{border:1}}}
                                 onClick={()=> setDarkTheme(!darkTheme)}> {darkTheme? <DarkModeIcon/> : <LightModeIcon/>} 
                         </IconButton> 
                 </Toolbar>
