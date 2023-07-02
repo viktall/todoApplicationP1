@@ -17,7 +17,6 @@ import { ThemeProvider, createTheme } from "@mui/material/styles";
 import LightModeIcon from "@mui/icons-material/LightMode";
 import DarkModeIcon from "@mui/icons-material/DarkMode";
 import AlertDialog from "./Confirm_Deletion";
-import BgImg from "./bgimg";
 import FormDialog from "./Edit_Dialog";
 import DeleteAllDialog from "./DeleteAllDialog";
 import "react-toastify/dist/ReactToastify.css";
@@ -29,13 +28,7 @@ import { DemoContainer, DemoItem } from "@mui/x-date-pickers/internals/demo";
 import { DateCalendar } from "@mui/x-date-pickers/DateCalendar";
 import dayjs from "dayjs";
 
-import {
-  Alarm,
-  CalendarMonth,
-  Cancel,
-  Delete,
-  Edit,
-} from "@mui/icons-material";
+import { CalendarMonth, Cancel, Delete, Edit } from "@mui/icons-material";
 
 const App = () => {
   const Date = dayjs();
@@ -58,8 +51,12 @@ const App = () => {
       mode: "dark",
       primary: {
         main: "#1565c0",
-        dark: "#232323",
-        light: "#202020",
+        contrast: "#212121",
+        neutral: "#2a2a2a",
+        custom: "#303030",
+      },
+      background: {
+        default: "#212121",
       },
     },
   });
@@ -69,8 +66,12 @@ const App = () => {
       mode: "light",
       primary: {
         main: "#42a5f5",
-        dark: "#e8e8e8",
-        light: "#f2f2f2",
+        contrast: "#f2f2f2",
+        neutral: "#e2e2e2",
+        custom: "#d0d0d0",
+      },
+      background: {
+        default: "#f2f2f2",
       },
     },
   });
@@ -187,20 +188,20 @@ const App = () => {
     setIsDeleteAll(false);
   };
 
-  console.log(clockVal);
-
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
       <ThemeProvider theme={darkTheme ? dark : light}>
         <CssBaseline />
         <Box>
-          <AppBar position="fixed" color="primary" enableColorOnDark>
+          <AppBar position="fixed" enableColorOnDark>
             <Toolbar variant="dense">
-              <Typography
-                component="div"
-                //sx={{ color: "primary.contrastText" }}
-              >
-                DOIT
+              <Typography component="div">
+                <img
+                  alt="todoList"
+                  src="../src/asset/logo.svg"
+                  width={24}
+                  height={24}
+                />
               </Typography>
               <Box sx={{ flexGrow: 1 }} />
               <IconButton
@@ -208,31 +209,33 @@ const App = () => {
                 size="large"
                 aria-label="theme switch"
                 onClick={() => setDarkTheme(!darkTheme)}
-                //sx={{ color: "primary.contrastText" }}
               >
                 {darkTheme ? <DarkModeIcon /> : <LightModeIcon />}
               </IconButton>
             </Toolbar>
           </AppBar>
-          <Toolbar variant="dense"/>
+          <Toolbar variant="dense" />
 
-          <Box sx={{ display: { xs: "block", md: "flex" } }}>
+          <Box sx={{ display: { xs: "block", md: "flex" }, height: "100vh" }}>
             <Box
               flex={3}
               sx={{
                 display: { xs: "none", md: "flex" },
-                flexDirection: "column",
-                alignItems: "center",
-                pt: "7%",
-                bgcolor: "primary.dark",
+                justifyContent: "center",
+                py: 8,
+                bgcolor: "primary.neutral",
               }}
             >
               <Box
                 sx={{
                   position: "fixed",
+                  display: "flex",
+                  flexDirection: "column",
+                  gap: 5,
+                  textAlign: "center",
                 }}
               >
-                <Box sx={{ pb: 8, fontSize: 30 }}>{Date.format("lll")}</Box>
+                <Box sx={{ fontSize: 30 }}>{Date.format("lll")}</Box>
                 <DemoContainer components={["DateCalendar"]}>
                   <DateCalendar value={Date} disabled />
                 </DemoContainer>
@@ -245,16 +248,19 @@ const App = () => {
                 display: "flex",
                 flexDirection: "column",
                 alignItems: "center",
-                py: 7,
-                bgcolor: "primary.light",
+                py: 8,
+                bgcolor: "primary.contrast",
               }}
             >
               <Box sx={{ textAlign: "center" }}>
-                <Box sx={{ fontSize: "40px", lineHeight: 1 }}>
-                  What do you want to do today?
-                </Box>
-                <Box sx={{ fontSize: "16px" }}>
-                  Maximize your productivity by having a clear plan for each day
+                <Box sx={{ lineHeight: 1 }}>
+                  <Box sx={{ fontSize: "36px" }}>
+                    What do you want to do today?
+                  </Box>
+                  <Box sx={{ fontSize: "14px" }}>
+                    Maximize your productivity by having a clear plan for each
+                    day
+                  </Box>
                 </Box>
                 <Box sx={{ py: 5 }}>
                   <Button
@@ -268,14 +274,39 @@ const App = () => {
               </Box>
               <Drawer
                 anchor="left"
-                sx={{ "& .MuiDrawer-paper": { bgcolor:"primary.dark" } }}
+                sx={{ "& .MuiDrawer-paper": { bgcolor: "primary.neutral" } }}
                 open={toggleDrawer}
                 onClose={() => setToggleDrawer(false)}
               >
                 <Box
-                  sx={{ width: { md: "40vw", xs: "100vh" } }}
                   role="presentation"
+                  sx={{
+                    width: { md:'38vw', sm: "60vw", xs: "100vw" },
+                    py: 10,
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "center",
+                    gap:7,
+                  }}
                 >
+                  <Box
+                    sx={{
+                      display: "flex",
+                      flexDirection: "column",
+                      alignItems: "center",
+                      gap:3,
+                    }}
+                  >
+                    <Box sx={{ fontSize: 25 }}>{Date.format("lll")}</Box>
+                    <Box>
+                      <img
+                        alt="todoList"
+                        src="../src/asset/logo2.svg"
+                        width={50}
+                        height={50}
+                      />
+                    </Box>
+                  </Box>
                   <Box
                     component="form"
                     onSubmit={HandleSubmit}
@@ -285,11 +316,11 @@ const App = () => {
                       display: "flex",
                       flexDirection: "column",
                       alignItems: "center",
-                      gap: 5,
-                      pt: 10,
+                      gap:1,
                     }}
                   >
                     <TextField
+                      fullWidth
                       id="outlined-multiline-static"
                       label="Enter task"
                       value={task}
@@ -298,8 +329,9 @@ const App = () => {
                     />
 
                     <DemoContainer components={["DatePicker", "TimePicker"]}>
-                      <DemoItem label="deadline">
+                      <DemoItem>
                         <DatePicker
+                          label="Date of Completion"
                           value={value}
                           onChange={(newValue) =>
                             setValue(newValue.format("ll"))
@@ -307,6 +339,7 @@ const App = () => {
                         />
 
                         <TimePicker
+                          label="Time of Completion"
                           value={clockVal}
                           onChange={(newValue) =>
                             setClock(newValue.format("LT"))
@@ -330,27 +363,26 @@ const App = () => {
                     sx={{
                       display: "flex",
                       alignItems: "center",
-                      bgcolor: "primary.dark",
-                      borderRadius: "10px 10px 0px 0px",
-                      p: 5,
+                      bgcolor: "primary.neutral",
+                      borderRadius: "5px 5px 0px 0px",
+                      p: 2,
                     }}
                   >
-                    <Box
+                    <Checkbox
+                      checked={todo.completed}
+                      onClick={() => ON_COMPLETE(todo)}
                       sx={{
                         "& .MuiSvgIcon-root": {
                           color: todo.completed ? "green" : null,
                         },
                       }}
-                      onClick={() => ON_COMPLETE(todo)}
-                    >
-                      <Checkbox checked={todo.completed} />
-                    </Box>
+                    />
 
                     <Box
                       sx={{
                         wordBreak: "break-word",
                         color: todo.completed ? "green" : null,
-                        p: 3,
+                        p: 1,
                         cursor: "pointer",
                         flexGrow: 1,
                       }}
@@ -359,50 +391,40 @@ const App = () => {
                       {todo.label}
                     </Box>
 
-                    <Box>
-                      <Box sx={{ mb: 2 }}>
-                        <IconButton
-                          edge="end"
-                          size="large"
-                          aria-label="delete-icon"
-                          onClick={() => HandleAlertOpen(todo)}
-                        >
-                          <Delete />
-                        </IconButton>
-                      </Box>
-                      <Box>
-                        <IconButton
-                          edge="end"
-                          size="large"
-                          aria-label="Edit-icon"
-                          onClick={() => HandleOnEditClick(todo)}
-                          disabled={todo.completed}
-                        >
-                          {todo.completed ? <Cancel /> : <Edit />}
-                        </IconButton>
-                      </Box>
+                    <Box
+                      sx={{ display: "flex", flexDirection: "column", gap: 1 }}
+                    >
+                      <IconButton
+                        edge="start"
+                        aria-label="delete-icon"
+                        onClick={() => HandleAlertOpen(todo)}
+                      >
+                        <Delete />
+                      </IconButton>
+
+                      <IconButton
+                        edge="start"
+                        aria-label="Edit-icon"
+                        onClick={() => HandleOnEditClick(todo)}
+                        disabled={todo.completed}
+                      >
+                        {todo.completed ? <Cancel /> : <Edit />}
+                      </IconButton>
                     </Box>
                   </Box>
 
-                  <Box
-                    sx={{
-                      mb: 1,
-                      px: 6,
-                      py: 2,
-                      bgcolor: "#ccc",
-                    }}
-                  >
+                  <Box sx={{ mb: 3, px: 3, py: 1, bgcolor: "primary.custom" }}>
                     <Box
                       sx={{
                         display: "flex",
                         alignItems: "center",
-                        gap: 2,
+                        gap: 1,
                       }}
                     >
-                      <CalendarMonth sx={{ fontSize: 32 }} />
-                      <Box sx={{ lineHeight: 1.4, fontSize: 12 }}>
-                        <Box>Created on:{todo.todayDate} </Box>
-                        <Box>{`Deadline:${todo.dateObj} ${todo.clockObj}`}</Box>
+                      <CalendarMonth sx={{ fontSize: 28 }} />
+                      <Box sx={{ lineHeight: 1.6, fontSize: 9 }}>
+                        <Box>Created on: {todo.todayDate} </Box>
+                        <Box>{`Deadline: ${todo.dateObj} ${todo.clockObj}`}</Box>
                       </Box>
                     </Box>
                   </Box>
@@ -419,9 +441,7 @@ const App = () => {
                   </Button>
                 </Box>
               ) : (
-                <Box>
-                  <BgImg />
-                </Box>
+                <img alt='backgroundImage' src="../src/asset/bgimg.svg" />
               )}
             </Box>
           </Box>
@@ -458,7 +478,7 @@ const App = () => {
               {"Are you sure you want to delete all task?"}
             </DeleteAllDialog>
           )}
-          <ToastContainer theme={darkTheme? "light":'red'}/>
+          <ToastContainer theme={darkTheme ? "light" : "dark"} />
         </Box>
       </ThemeProvider>
     </LocalizationProvider>
