@@ -12,6 +12,8 @@ import {
   Drawer,
 } from "@mui/material";
 import { v4 as uuidv4 } from "uuid";
+import Logo from "./logo";
+import Bgimg from "./bgimg";
 import { ToastContainer, toast } from "react-toastify";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import LightModeIcon from "@mui/icons-material/LightMode";
@@ -196,12 +198,11 @@ const App = () => {
           <AppBar position="fixed" enableColorOnDark>
             <Toolbar variant="dense">
               <Typography component="div">
-                <img
-                  alt="todoList"
-                  src="../src/asset/logo.svg"
-                  width={24}
-                  height={24}
-                />
+                {darkTheme ? (
+                  <Logo color="#303030" width={30} height={30} />
+                ) : (
+                  <Logo color="#f2f2f2" width={30} height={30} />
+                )}
               </Typography>
               <Box sx={{ flexGrow: 1 }} />
               <IconButton
@@ -281,12 +282,12 @@ const App = () => {
                 <Box
                   role="presentation"
                   sx={{
-                    width: { md:'38vw', sm: "60vw", xs: "100vw" },
+                    width: { md: "38vw", sm: "60vw", xs: "100vw" },
                     py: 10,
                     display: "flex",
                     flexDirection: "column",
                     alignItems: "center",
-                    gap:7,
+                    gap: 7,
                   }}
                 >
                   <Box
@@ -294,17 +295,16 @@ const App = () => {
                       display: "flex",
                       flexDirection: "column",
                       alignItems: "center",
-                      gap:3,
+                      gap: 3,
                     }}
                   >
                     <Box sx={{ fontSize: 25 }}>{Date.format("lll")}</Box>
                     <Box>
-                      <img
-                        alt="todoList"
-                        src="../src/asset/logo2.svg"
-                        width={50}
-                        height={50}
-                      />
+                      {darkTheme ? (
+                        <Logo color="#c2c2c2" width={50} height={50} />
+                      ) : (
+                        <Logo color="#303030" width={50} height={50} />
+                      )}
                     </Box>
                   </Box>
                   <Box
@@ -316,7 +316,7 @@ const App = () => {
                       display: "flex",
                       flexDirection: "column",
                       alignItems: "center",
-                      gap:1,
+                      gap: 1,
                     }}
                   >
                     <TextField
@@ -441,7 +441,7 @@ const App = () => {
                   </Button>
                 </Box>
               ) : (
-                <img alt='backgroundImage' src="../src/asset/bgimg.svg" />
+                <Bgimg />
               )}
             </Box>
           </Box>
