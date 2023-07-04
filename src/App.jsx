@@ -13,7 +13,7 @@ import {
 } from "@mui/material";
 import { v4 as uuidv4 } from "uuid";
 import Logo from "./logo";
-import Bgimg from "./bgimg";
+import Bgimg from "./bgImg";
 import { ToastContainer, toast } from "react-toastify";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import LightModeIcon from "@mui/icons-material/LightMode";
