@@ -3,7 +3,6 @@ import React from "react";
 const Bgimg = () => {
   return (
     <svg
-      xmlns="http://www.w3.org/2000/svg"
       data-name="Layer 1"
       width="260"
       height="300"

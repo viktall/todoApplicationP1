@@ -198,11 +198,9 @@ const App = () => {
           <AppBar position="fixed" enableColorOnDark>
             <Toolbar variant="dense">
               <Typography component="div">
-                {darkTheme ? (
-                  <Logo color="#303030" width={30} height={30} />
-                ) : (
-                  <Logo color="#f2f2f2" width={30} height={30} />
-                )}
+                
+                  <Logo darkTheme={darkTheme} width={30} height={30} />
+                
               </Typography>
               <Box sx={{ flexGrow: 1 }} />
               <IconButton
@@ -300,11 +298,9 @@ const App = () => {
                   >
                     <Box sx={{ fontSize: 25 }}>{Date.format("lll")}</Box>
                     <Box>
-                      {darkTheme ? (
-                        <Logo color="#c2c2c2" width={50} height={50} />
-                      ) : (
-                        <Logo color="#303030" width={50} height={50} />
-                      )}
+                      
+                        <Logo darkTheme={darkTheme} width={50} height={50} />
+                      
                     </Box>
                   </Box>
                   <Box
